@@ -1,108 +1,67 @@
+# The Monolith  Phase B: *"Oh. So THAT'S what it does."*
 
-# spec2cloud
-
-**Spec2Cloud** is an AI-powered development workflow that transforms high-level product ideas into production-ready applications deployed on Azure—using specialized GitHub Copilot agents working together.
-
-## 🎯 Overview
-
-This repository provides a preconfigured development environment and agent-driven workflow that works in two directions:
-
-- **Greenfield (Build New)**: Transform product ideas into deployed applications through structured specification-driven development
-
-https://github.com/user-attachments/assets/f0529e70-f437-4a14-93bc-4ab5a0450540
-
-
-- **Greenfield (Shell-Based)**: Start from a predefined “shell” baseline and let coding agents translate natural language requirements to fill in the gaps via code.
-   - https://github.com/EmeaAppGbb/shell-dotnet
-   - https://github.com/EmeaAppGbb/agentic-shell-dotnet
-   - https://github.com/EmeaAppGbb/agentic-shell-python
-
-
-
-- **Brownfield (Document Existing + Modernize)**: Reverse engineer existing codebases into comprehensive product and technical documentation and optionally modernize codebases
-
-Both workflows use specialized GitHub Copilot agents working together to maintain consistency, traceability, and best practices.
-
-## 🚀 Quick Start
-
-### Option 1: Use This Repository as a Template (Full Environment)
-
-**Greenfield (New Project)**:
-1. **Use this repo as a template** - Click "Use this template" to create your own GitHub repository
-2. **Open in Dev Container** - Everything is preconfigured in `.devcontainer/`
-3. **Describe your app idea** - The more specific, the better
-4. **Follow the workflow** - Use the prompts to guide specialized agents through each phase
-
-**Brownfield (Existing Codebase)**:
-1. **Use this repo as a template** - Click "Use this template" to create your own GitHub repository
-2. **copy your existing codebase** into the new repository
-3. **Open in Dev Container** - Everything is preconfigured in `.devcontainer/`
-4. **Run `/rev-eng`** - Reverse engineer codebase into specs and documentation
-5. **Run `/modernize`** - (optional) Create modernization plan and tasks
-6. **Run `/plan`** - (optional) Execute modernization tasks planned by the modernization agent
-
-### Option 2: Install Into Existing Project using VSCode Extension
-
-TODO
-
-### Option 3: Install Into Existing Project using APM CLI
-
-TODO
-
-### Option 4: Install Into Existing Project using Manual Script
-
-Transform any existing project into a spec2cloud-enabled development environment:
-
-**One-Line Install** (Recommended):
-```bash
-curl -fsSL https://raw.githubusercontent.com/EmeaAppGbb/spec2cloud/main/scripts/quick-install.sh | bash
-```
-
-**Manual Install**:
-```bash
-# Download latest release
-curl -L https://github.com/EmeaAppGbb/spec2cloud/releases/latest/download/spec2cloud-full-latest.zip -o spec2cloud.zip
-unzip spec2cloud.zip -d spec2cloud
-cd spec2cloud
-
-# Run installer
-./scripts/install.sh --full                    # Linux/Mac
-.\scripts\install.ps1 -Full                    # Windows
-
-# Start using workflows
-code .
-# Use @pm, @dev, @azure agents and /prd, /frd, /plan, /deploy prompts
-```
-
-**What Gets Installed**:
-- ✅ 10 specialized AI agents (Spec2Cloud, PM, Dev Lead, Dev, Azure, Tech Analyst, Modernizer, Extender, Planner, Architect)
-- ✅ 12 workflow prompts
-- ✅ MCP server configuration (optional)
-- ✅ Dev container setup (optional)
-- ✅ APM configuration (optional)
-
-See **[INTEGRATION.md](INTEGRATION.md)** for detailed installation options and troubleshooting.
-
-
-## 📚 Documentation
-
-Longer guides are in the `docs/` folder (MkDocs-ready structure).
-
-- Docs index: [docs/index.md](docs/index.md)
-- Shell baselines: [docs/shells.md](docs/shells.md)
-- Architecture: [docs/architecture.md](docs/architecture.md)
-- Workflows: [docs/workflows.md](docs/workflows.md)
-- Generated docs structure: [docs/specs-structure.md](docs/specs-structure.md)
-- Standards / APM: [docs/apm.md](docs/apm.md)
-- Examples: [docs/examples.md](docs/examples.md)
-- Benefits: [docs/benefits.md](docs/benefits.md)
-
-For installation/integration scenarios, see [INTEGRATION.md](INTEGRATION.md).
-
-## 🤝 Contributing
-
-Contributions welcome! Extend with additional agents, prompts, or MCP servers.
+> *"We ran the AI reverse engineering tool. We have documentation now. I'm not sure if that makes me feel better or worse."*
 
 ---
 
-**From idea to production in minutes, not months.** 🚀
+## What happened
+
+So we took that terrifying 90,000-line C/Assembly monolith from Phase A and pointed an AI agent at it. Told it to figure out what's going on. And it did.
+
+Turns out, the codebase is actually... kind of impressive? In a terrifying, 1996 kind of way.
+
+## What we now know
+
+After the reverse engineering (`/rev-eng`), we have a `specs/` folder with actual documentation:
+
+- **`specs/prd.md`**  A product requirements document. Synthesized from code. The code now has a "vision". Wild.
+- **`specs/features/`**  Feature documents for each major subsystem. There are... a lot of subsystems.
+- **`specs/tasks/`**  Technical task breakdowns with actual file references. Every function, every module, mapped.
+- **`specs/docs/architecture/`**  Architecture diagrams. The monolith has *layers*. Who knew.
+- **`specs/docs/technology/`**  A full technology inventory. C, x86 Assembly, custom bytecode VM, platform-specific everything.
+
+## What we learned
+
+Things I did **not** expect to find in a 30-year-old codebase:
+
+- A custom **virtual machine** with its own bytecode interpreter (`pr_exec.c`)
+- An **entity-component system** before that was cool (edicts, `progdefs.h`)
+- **Client-side prediction** for networking  in 1996!
+- **Hand-written x86 assembly** for the software renderer (because GPUs were optional back then)
+- Platform abstraction via `sys_*.c` files  DOS, Windows, Linux, Sun. *Sun.*
+- A file called `gas2masm` that converts between two types of assembly. Because one type of assembly wasn't enough.
+
+## The current state of things
+
+```
+Before reverse engineering:          After reverse engineering:
+                                     
+ "what is this?"                      "oh no, I understand it now"
+ "who wrote this?"                    "it's actually kind of brilliant"
+ "why is there assembly?"             "the assembly is the fast part"
+ "is this even C?"                    "it's C, QuakeC, and vibes"
+```
+
+## So... now what?
+
+Great question. I have documentation. I have architecture diagrams. I have feature specs.
+
+But I also have:
+- Zero tests
+- `sprintf` everywhere (security people, look away)
+- Build files for compilers that no longer exist
+- Platform code for operating systems nobody runs anymore
+- A codebase that assumes 8MB of RAM is generous
+
+**The documentation tells me WHAT exists. It doesn't tell me WHAT TO DO about it.**
+
+Do I... modernize it? Rewrite it? Containerize it? Deploy it to the cloud?
+How do you even start? Where do you even begin with something like this?
+
+I need a plan. A real plan. Not just docs.
+
+---
+
+*Phase A: "I don't know what this is."*
+**Phase B: "I know what this is. I wish I didn't."**
+*Phase C: Coming soon  maybe a plan?*
